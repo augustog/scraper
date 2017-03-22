@@ -1,8 +1,12 @@
+//This file describes the structure of the add-on
+//as a JSON object
+
 {
-  "name": "CHANGE THIS : Extension boilerplate",
+  ///Basic data
+  "name": "Linkedin Scraper",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
+  "description": "Extract relevant contact data with one click!",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",
@@ -10,24 +14,59 @@
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
+
+
+  //// *Background script*(background.js): This is going to load with the browser
+  //// and is going to be running until the browser is closed.
+  //// This script has two important roles:
+  ////    a) Listen for browsing activity and activate the add-on when
+  ////       the user is in the right page
+  ////    b) Listen for user input (click on the button) - since it's
+  ////       in the background and always running it's great for that
+  ////    c) Save the data to disk (as, for (obvious) security reasons, no other script
+  ////       can access the disk through the chrome.system.storage API)
+
   "background": {
     "scripts": [
       "src/bg/background.js"
     ],
-    "persistent": true
+    "persistent": false
   },
+
+  //// *Page action*: This is where we define what kind of interaction we want
+  //// the user to have. Page action is how Chrome refers to buttons that are
+  //// only activated for certain pages. We will have to code this behavior in anyway,
+  //// because fuck logic.
+
+
   "page_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "page action demo",
-    "default_popup": "src/page_action/page_action.html"
+    "default_title": "Scrape!"
   },
+
+  //// Permissions: Which pages can this add-on work on... no need to further ellaborate
+
+  "permissions": [
+    "https://*.linkedin.com/*"
+  ],
+
+
+  //// *Content Scripts*(inject.js): As, due to Chrome's internal architecture, the background script
+  //// cannot access the content of the page you're surfing (known in the trade as the DOM),
+  //// you need to *inject* some code into it. This code will run inside the page and will
+  ////    a) Wait for the background.js script to tell it what to do
+  ////    b) Extract the data from the DOM
+  ////    c) Send it back to background.js for storage (when you wonder why only that script
+  ////       can store stuff to disk, imagine how safe it would be to allow a script that
+  ////       runs within the page, that is, code that came from the internet, to access your disk
+
   "content_scripts": [
     {
       "matches": [
-        "https://www.google.com/*"
+         "https://*.linkedin.com/*" //Where it will be injected
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject/inject.js"  //What will be injected
       ]
     }
   ]
