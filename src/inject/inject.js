@@ -1,7 +1,10 @@
 
 function extractData(){
 	//TODO: Extract the relevant data from the profile
-	// e.g. var name = document.getElementById('name').text;
+	// Extractors look like this:
+	// e.g. var name = document.getElementById('name').innerText;
+	// e.g. var name = document.getElementByXpath('//div[@class="container"]/h1[@class="name"]').innerText;
+	// Xpath is a very powerful selector, full doc: https://www.w3schools.com/xml/xpath_nodes.asp
 	var name = 'John Banana';
 	var tagLine = 'King of Bullshit';
 	//TODO: Add other fields
