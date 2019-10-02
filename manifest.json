@@ -5,8 +5,8 @@
   ///Basic data alsdfkbnajlsnbdflkasnflkasbfndal
   "name": "Linkedin Scraper",
   "version": "0.0.1",
-  "manifest_version": 2,
-  "description": "Extract relevant contact data with one click!",
+  "manifest_version": 9,
+  "description": "Extract sodfkadslkfndslkn relevant contact data with one click!",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",
